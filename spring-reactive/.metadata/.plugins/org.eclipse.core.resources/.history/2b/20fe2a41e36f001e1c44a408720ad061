@@ -1,0 +1,22 @@
+package com.reactive;
+
+import org.junit.jupiter.api.Test;
+
+import reactor.core.publisher.Mono;
+
+public class monoFluxTest {
+
+//public void monoTest() {
+//    Mono<String> mono = Mono.just("Spring reactive").log();
+//    mono.subscribe(System.out::println);
+//}
+//}
+	
+@Test
+public void monoTest_withError() {
+    Mono<String> mono = Mono.just("Spring reactive").log();
+    mono.subscribe(System.out::println, (e) -> {
+        System.out.println("Exception is " + e.getMessage());
+    });
+}
+}

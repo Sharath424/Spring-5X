@@ -1,0 +1,24 @@
+package com.reactive.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.reactive.dao.TodoDao;
+import com.reactive.model.Todo;
+
+import reactor.core.publisher.Flux;
+
+public class TodoService {
+	
+	@Autowired
+    private TodoDao todoDao;
+
+	  public Flux<Todo> loadAllTodosStream()
+	  {
+	    long startTime = System.currentTimeMillis();
+	    Flux<Todo> todoFlux = todoDao.getTodosStream();
+	    long endTime = System.currentTimeMillis();
+	    System.out.println("Total time taken : " + (endTime - startTime));
+	    return todoFlux;
+	  }
+
+}

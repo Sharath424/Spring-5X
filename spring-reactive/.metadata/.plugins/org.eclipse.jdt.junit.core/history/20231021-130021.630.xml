@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="monoFluxTest" project="springreactive" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.reactive.monoFluxTest" time="0.264" displayname="monoFluxTest" uniqueid="[engine:junit-jupiter]/[class:com.reactive.monoFluxTest]">
+    <testcase name="fluxTest" classname="com.reactive.monoFluxTest" time="0.233" displayname="fluxTest()" uniqueid="[engine:junit-jupiter]/[class:com.reactive.monoFluxTest]/[method:fluxTest()]"/>
+    <testcase name="monoTest" classname="com.reactive.monoFluxTest" time="0.03" displayname="monoTest()" uniqueid="[engine:junit-jupiter]/[class:com.reactive.monoFluxTest]/[method:monoTest()]"/>
+  </testsuite>
+</testrun>

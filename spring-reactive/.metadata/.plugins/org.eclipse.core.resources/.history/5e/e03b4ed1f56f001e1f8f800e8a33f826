@@ -1,0 +1,23 @@
+package com.reactive.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.reactive.model.Todo;
+import com.reactive.service.TodoService;
+
+import reactor.core.publisher.Flux;
+
+public class TodoController {
+	
+	@Autowired
+    private TodoService service;
+
+	
+	@GetMapping("/stream")
+	public Flux<Todo> getAllTodosStream(){
+
+	    return service.loadAllTodosStream();
+	}
+
+}

@@ -1,0 +1,14 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="employee" class="com.example.setter.Employee">
+        <property name="user" value="spring-MVC" />
+    </bean>
+
+    
+    <bean id="technology" class="com.example.setter.Technology">
+    <property name="employee" ref="employee" />
+    <!-- Other property configurations if any -->
+</bean>
+</beans>

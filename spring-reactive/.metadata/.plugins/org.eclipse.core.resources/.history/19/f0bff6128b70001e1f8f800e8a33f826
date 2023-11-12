@@ -1,0 +1,27 @@
+package com.reactive.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.reactive.model.Todo;
+import com.reactive.service.TodoService;
+
+import reactor.core.publisher.Flux;
+
+@RestController
+@RequestMapping("/todo")
+public class TodoController {
+
+	@Autowired
+	private TodoService service;
+
+	@GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public Flux<Todo> getAllTodosStream() {
+
+		return service.loadAllTodosStream();
+	}
+
+}

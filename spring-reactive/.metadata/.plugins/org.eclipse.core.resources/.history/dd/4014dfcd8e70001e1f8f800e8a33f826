@@ -1,0 +1,33 @@
+package com.reactive.configuration;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import reactor.core.publisher.Flux;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
+@Configuration
+public class FunctionalTodoController {
+    @Autowired
+    private TodoService service;
+
+    @Bean
+    public RouterFunction<ServerResponse> route() {
+        return RouterFunctions.route()
+                .GET("/todo/stream", this::getAllTodosStream)
+                .build();
+    }
+
+    public Mono<ServerResponse> getAllTodosStream(ServerRequest request) {
+        Flux<Todo> todoFlux = service.loadAllTodosStream();
+
+        return ServerResponse.ok()
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .body(todoFlux, Todo.class)
+                .doOnTerminate(() -> System.out.println("Stream completed."));
+    }
+}

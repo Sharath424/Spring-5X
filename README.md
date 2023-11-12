@@ -1,5 +1,3 @@
-# Spring-5X
-
 <!--
 author:   Sharath
 
@@ -1410,6 +1408,10 @@ public class HelloWorldController {
 	)
 
 ```
+### Spring boot work flow
+
+![Spring :spring-boot-work-flow](images/spring-workflow.png)
+
 ### Explanation
 <br>
 
@@ -3266,6 +3268,49 @@ Reactive Streams defines two types of reactive streams:
 - You can apply a wide range of operators to both Flux and Mono to transform, filter, and manipulate the data.
 - When working with either Flux or Mono, you can subscribe to them to initiate the asynchronous processing. Subscribers can consume the data, react to events, and handle errors.
 
+
+## Reactive work flow
+
+![Spring boot :yml](images/Spring-reactive-workflow.png)
+
+
+### Reactive work flow explanation
+
+The concepts of "Publisher," "Subscriber," and "Subscription" are fundamental to understanding reactive programming and the Reactive Streams API. These concepts describe how data flows from a data source (the Publisher) to a data consumer (the Subscriber) with a mechanism for managing the flow (the Subscription). Here's an explanation of the workflow for each of these components:
+
+**Publisher:**
+- A Publisher is the source of data in a reactive system. It represents a sequence of data that can emit values to multiple Subscribers.
+- Publishers are typically asynchronous, meaning they can emit data at any time, and Subscribers should be prepared to handle these emissions as they arrive.
+- Publishers implement the org.reactivestreams.Publisher interface, which defines methods like `subscribe` for attaching Subscribers to the Publisher.
+- Publishers emit data via the `onNext`, `onError`, and `onComplete` methods.
+  - `onNext`: Emits a data item to Subscribers.
+  - `onError`: Signals an error condition to Subscribers, terminating the sequence.
+  - `onComplete`: Signals the successful completion of the sequence to Subscribers.
+
+**Subscriber:**
+- A Subscriber is a data consumer in a reactive system. It subscribes to a Publisher to receive and react to data emitted by the Publisher.
+- Subscribers implement the org.reactivestreams.Subscriber interface, which defines methods for handling emissions, errors, and the completion of the sequence.
+- Subscribers register themselves with a Publisher by calling the `subscribe` method of the Publisher. The `subscribe` method establishes a connection between the Publisher and the Subscriber.
+- Subscribers receive data through the `onNext` method, handle errors through the `onError` method, and respond to the completion of the sequence through the `onComplete` method.
+- Subscribers can request a specific number of items they want to receive from the Publisher using the `Subscription` object provided to them. This allows Subscribers to manage backpressure.
+
+**Subscription:**
+- A Subscription is an object that represents the connection between a Publisher and a Subscriber. It's created when a Subscriber subscribes to a Publisher using the `subscribe` method.
+- The Subscription object provides the Subscriber with the ability to request more data (backpressure) or to cancel the subscription altogether.
+- Subscribers can call the `request` method on the Subscription to request a specified number of data items they are ready to consume. This helps in managing the flow of data from the Publisher, preventing data overload.
+- Subscribers can call the `cancel` method on the Subscription to terminate the subscription and stop receiving data from the Publisher.
+
+**Workflow:**
+
+1. A Subscriber expresses its interest in receiving data by subscribing to a Publisher using the `subscribe` method. This establishes a connection between the Subscriber and the Publisher.
+
+2. The Publisher begins emitting data items and sends them to the Subscriber using the `onNext` method. The Subscriber processes these emissions.
+
+3. If an error occurs during the data emission, the Publisher signals this to the Subscriber using the `onError` method. The Subscriber can handle the error as needed.
+
+4. When the Publisher has completed emitting data, it signals the completion to the Subscriber using the `onComplete` method.
+
+5. Throughout this process, the Subscriber can use the Subscription to manage backpressure, requesting more data items when it's ready to handle them and cancelling the subscription when it's done.
 
 
 

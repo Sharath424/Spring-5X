@@ -1,0 +1,5 @@
+package com.reactive.configuration;
+
+public class WebFluxConfig {
+
+}
